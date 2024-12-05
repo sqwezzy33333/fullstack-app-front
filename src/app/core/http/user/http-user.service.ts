@@ -9,7 +9,7 @@ import {ApiRequest} from "../template-api/api-request/api.request";
 export class HttpUserService {
 
   getMe$() {
-    return this.apiService.request<User>(new ApiRequest('user', 'me', null, 'GET', false, {}));
+    return this.apiService.request<User>(new ApiRequest('user', 'me', null, 'GET', true, {}));
   }
 
   constructor(

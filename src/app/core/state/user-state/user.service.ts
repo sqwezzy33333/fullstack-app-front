@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, of} from "rxjs";
 import {User} from "../../http/user/models";
+import {LoginResponse} from "../../http/auth/models";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,35 @@ export class UserService {
     return this.isAuth$.value;
   }
 
+  get accessToken() {
+    return localStorage.getItem("access");
+  }
+
   logOut$() {
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    this.isAuth = false;
     return of(null);
+  }
+
+  login$(tokens: LoginResponse) {
+    localStorage.setItem('access', tokens.accessToken);
+    localStorage.setItem('refresh', tokens.refreshToken);
+    this.isAuth = true;
+    return of(null)
+  }
+
+
+  loadToken() {
+    const token = localStorage.getItem('access');
+    console.log(token);
+    if (token) {
+      this.isAuth = true;
+    }
+  }
+
+  constructor() {
+    this.loadToken()
   }
 
 }

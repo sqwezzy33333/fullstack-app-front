@@ -21,7 +21,7 @@ export class LoadEnvironmentService {
             this.configService.env = config
           }),
           switchMap(() =>
-            this.userStateService.isAuth ? this.httpUserService.getMe$() : of(null)
+            this.userStateService.isAuthValue ? this.httpUserService.getMe$() : of(null)
           ),
           catchError((err) => this.userStateService.logOut$()),
           switchMap((user) => user ? of(user) : this.userStateService.logOut$())

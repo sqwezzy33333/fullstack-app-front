@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import {LoadEnvironmentService} from "../../initialization/services/load-environment.service";
 import {ApiRequest} from "./api-request/api.request";
-import {ApiResponse} from "./api-request/models/api-models/api-response";
 import {API_PATH} from "../../../shared/constants";
-import {ApiError} from "./api-request/models/api-models/api-error";
 import {ConfigService} from "../../initialization/services/config.service";
+import {UserService} from "../../state/user-state/user.service";
 
 @Injectable({
   providedIn: 'root',
@@ -93,8 +91,9 @@ export class ApiTemplateService {
     };
 
     if (requiredToken) {
-      // httpOptions.headers = httpOptions.headers.append('Authorization', 'Bearer ' + this.sessionStorageService.accessToken);
+      httpOptions.headers = httpOptions.headers.append('Authorization', 'Bearer ' + this.userState.accessToken);
     }
+    console.log(httpOptions.headers, requiredToken);
     return httpOptions;
   }
 
@@ -109,5 +108,6 @@ export class ApiTemplateService {
   constructor(
     private httpClient: HttpClient,
     private configService: ConfigService,
+    private userState: UserService
   ) {}
 }

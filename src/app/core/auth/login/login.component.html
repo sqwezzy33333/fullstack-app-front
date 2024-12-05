@@ -1,1 +1,28 @@
-<p>login works!</p>
+<h2>Авторизация</h2>
+
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Логин</mat-label>
+    <input
+      matInput
+      placeholder="sqwezzy"
+      required
+      formControlName="login"
+    />
+    <mat-error mat-error-ext></mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Пароль</mat-label>
+    <input
+      matInput
+      placeholder="******"
+      required
+      type="password"
+      formControlName="password"
+    />
+    <mat-error mat-error-ext></mat-error>
+  </mat-form-field>
+
+  <button (click)="login()" mat-flat-button>Войти</button>
+</form>

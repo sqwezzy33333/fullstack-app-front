@@ -30,7 +30,8 @@ import {NotificationService} from "../../services/notification/notification.serv
   styleUrl: './register.component.scss',
   providers: [
     DestroyService
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterComponent {
 
