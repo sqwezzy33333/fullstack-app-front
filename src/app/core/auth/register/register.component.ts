@@ -12,6 +12,7 @@ import {filter} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatErrorExtComponent} from "../../../shared/component/mat-error-ext/mat-error-ext.component";
 import {displayFormErrors} from "../../../shared/utils";
+import {NotificationService} from "../../services/notification/notification.service";
 
 @Component({
   selector: 'app-register',
@@ -56,7 +57,8 @@ export class RegisterComponent {
       }),
       filter(Boolean)
     ).subscribe((response) => {
-      this.router.navigate(['dashboard']).then()
+      this.notificationService.display('Регистрация завершена', 'success')
+      this.router.navigate(['login']).then()
     });
   }
 
@@ -64,7 +66,8 @@ export class RegisterComponent {
     private authHttpService: HttpAuthService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private destroy$: DestroyService,) {
+    private destroy$: DestroyService,
+    private notificationService: NotificationService) {
   }
 
 }
