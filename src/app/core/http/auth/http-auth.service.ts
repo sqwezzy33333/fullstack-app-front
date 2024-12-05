@@ -1,23 +1,19 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {LoadEnvironmentService} from "../../initialization/services/load-environment.service";
-import {API_PATH} from "../../../shared/constants";
+import {ApiTemplateService} from "../template-api/api-template.service";
+import {RegisterUser} from "./models";
+import {ApiRequest} from "../template-api/api-request/api.request";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpAuthService {
 
-  getMe$() {
-    return this.httpClient.get(this.getPath(''))
-  }
 
-  private getPath(method: string): string {
-    return `${this.environmentService.env[API_PATH]}/user/${method}`;
+  register$(payload: RegisterUser) {
+    return this.apiService.request(new ApiRequest('auth', 'register', payload, 'POST'));
   }
 
   constructor(
-    private httpClient: HttpClient,
-    private environmentService: LoadEnvironmentService) {
+    private apiService: ApiTemplateService) {
   }
 }

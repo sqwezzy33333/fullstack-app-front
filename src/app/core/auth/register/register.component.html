@@ -1,1 +1,44 @@
-<p>register works!</p>
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Логин</mat-label>
+    <input
+      matInput
+      placeholder="sqwezzy"
+      required
+      formControlName="login"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Пароль</mat-label>
+    <input
+      matInput
+      placeholder="******"
+      required
+      type="password"
+      formControlName="password"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Имя</mat-label>
+    <input
+      matInput
+      placeholder="sqwezzy"
+      required
+      formControlName="forName"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Фамилия</mat-label>
+    <input
+      matInput
+      placeholder="sqwezzy"
+      required
+      formControlName="lastName"
+    />
+  </mat-form-field>
+
+  <button (click)="register()" mat-flat-button>Зарегестрироваться</button>
+</form>
