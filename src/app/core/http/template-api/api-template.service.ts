@@ -106,19 +106,6 @@ export class ApiTemplateService {
     }
   }
 
-  private mapError(data: HttpErrorResponse | ApiError): ApiResponse<null> {
-    if (data instanceof HttpErrorResponse) {
-      return {
-        result: null,
-        error: data.error,
-      };
-    }
-    return {
-      result: null,
-      error: data,
-    };
-  }
-
   constructor(
     private httpClient: HttpClient,
     private configService: ConfigService,

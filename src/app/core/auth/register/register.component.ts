@@ -1,14 +1,17 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {HttpUserService} from "../../http/user/http-user.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
 import {HttpAuthService} from "../../http/auth/http-auth.service";
 import {RegisterUser} from "../../http/auth/models";
 import {DestroyService} from "../../../shared/services/destroy/destroy.service";
-import {takeUntil} from "rxjs";
+import {catchError, of, takeUntil} from "rxjs";
+import {filter} from "rxjs/operators";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MatErrorExtComponent} from "../../../shared/component/mat-error-ext/mat-error-ext.component";
+import {displayFormErrors} from "../../../shared/utils";
 
 @Component({
   selector: 'app-register',
@@ -19,10 +22,11 @@ import {takeUntil} from "rxjs";
     MatLabel,
     ReactiveFormsModule,
     MatButton,
+    MatErrorExtComponent,
+    MatError
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DestroyService
   ]
@@ -44,8 +48,15 @@ export class RegisterComponent {
       return
     }
     const user = this.form.value as RegisterUser;
-    this.authHttpService.register$(user).pipe(takeUntil(this.destroy$)).subscribe((response) => {
-      console.log(response);
+    this.authHttpService.register$(user).pipe(
+      takeUntil(this.destroy$),
+      catchError((response: HttpErrorResponse) => {
+        displayFormErrors(response, this.form);
+        return of(null);
+      }),
+      filter(Boolean)
+    ).subscribe((response) => {
+      this.router.navigate(['dashboard']).then()
     });
   }
 

@@ -1,3 +1,5 @@
+<h2>Регистрация</h2>
+
 <form [formGroup]="form">
   <mat-form-field>
     <mat-label>Логин</mat-label>
@@ -7,6 +9,7 @@
       required
       formControlName="login"
     />
+    <mat-error mat-error-ext></mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -18,6 +21,7 @@
       type="password"
       formControlName="password"
     />
+    <mat-error mat-error-ext></mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -28,6 +32,7 @@
       required
       formControlName="forName"
     />
+    <mat-error mat-error-ext></mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -38,6 +43,7 @@
       required
       formControlName="lastName"
     />
+    <mat-error mat-error-ext></mat-error>
   </mat-form-field>
 
   <button (click)="register()" mat-flat-button>Зарегестрироваться</button>
