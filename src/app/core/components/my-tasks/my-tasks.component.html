@@ -1,0 +1,5 @@
+@for (task of getMyTask$ | async; track task.id) {
+  <div class="item">
+    {{ task.name }}
+  </div>
+}

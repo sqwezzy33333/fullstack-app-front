@@ -1,24 +1,24 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {DestroyService} from "../../../shared/services/destroy/destroy.service";
 import {HttpTaskService} from "../../http/task/http-task.service";
-import {MyTasksComponent} from "../../components/my-tasks/my-tasks.component";
+import {AsyncPipe} from "@angular/common";
+import {share, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-my-tasks',
   standalone: true,
   imports: [
-    MyTasksComponent
+    AsyncPipe
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  templateUrl: './my-tasks.component.html',
+  styleUrl: './my-tasks.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DestroyService]
 })
-export class DashboardComponent implements OnInit {
-
-  get getMyTask$() {
-    return this.httpTaskService.getMyTask$;
-  }
+export class MyTasksComponent implements OnInit {
+  getMyTask$= this.httpTaskService.getMyTask$().pipe(
+    takeUntil(this.destroy$),
+    share());
 
   constructor(private destroy$: DestroyService,
               private httpTaskService: HttpTaskService,) {

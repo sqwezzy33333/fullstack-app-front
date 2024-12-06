@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import {ApiRequest} from "./api-request/api.request";
 import {API_PATH} from "../../../shared/constants";
 import {ConfigService} from "../../initialization/services/config.service";
