@@ -1,11 +1,11 @@
-import {Component, Inject, inject} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {
   MAT_SNACK_BAR_DATA,
   MatSnackBarAction,
-  MatSnackBarActions, MatSnackBarConfig,
+  MatSnackBarActions,
   MatSnackBarLabel,
-  MatSnackBarRef
 } from "@angular/material/snack-bar";
+import {NotificationData} from "../../../core/services/notification/notification.service";
 
 @Component({
   selector: 'app-notification',
@@ -15,8 +15,6 @@ import {
   styleUrl: './notification.component.scss'
 })
 export class NotificationComponent {
-  snackBarRef = inject(MatSnackBarRef);
-
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: NotificationData) {
   }
 }

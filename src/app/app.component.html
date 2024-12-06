@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+@if (isAuth$ | async) {
+<app-navigation></app-navigation>
+}
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

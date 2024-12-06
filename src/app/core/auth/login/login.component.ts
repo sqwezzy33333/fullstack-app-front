@@ -10,22 +10,24 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {displayFormErrors} from "../../../shared/utils";
 import {filter} from "rxjs/operators";
 import {HttpAuthService} from "../../http/auth/http-auth.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {DestroyService} from "../../../shared/services/destroy/destroy.service";
 import {UserService} from "../../state/user-state/user.service";
+import {HttpUserService} from "../../http/user/http-user.service";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-    imports: [
-        MatButton,
-        MatError,
-        MatErrorExtComponent,
-        MatFormField,
-        MatInput,
-        MatLabel,
-        ReactiveFormsModule
-    ],
+  imports: [
+    MatButton,
+    MatError,
+    MatErrorExtComponent,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    ReactiveFormsModule,
+    RouterLink
+  ],
   templateUrl: './login.component.html',
   styleUrl: '../register/register.component.scss',
   providers: [DestroyService],
@@ -53,14 +55,17 @@ export class LoginComponent {
         return of(null);
       }),
       filter(Boolean),
-      switchMap((response) => this.userStateService.login$(response))
+      switchMap((response) => this.userStateService.login$(response)),
+      switchMap(() => this.httpUserService.getMe$())
     ).subscribe((response) => {
+      this.userStateService.user = response;
       this.router.navigate(['dashboard']).then()
     });
   }
 
   constructor(
     private authHttpService: HttpAuthService,
+    private httpUserService: HttpUserService,
     private router: Router,
     private formBuilder: FormBuilder,
     private destroy$: DestroyService,

@@ -14,3 +14,13 @@ form {
   gap: 20px;
   max-width: 400px;
 }
+
+a {
+  text-decoration: none;
+  color: plum;
+
+  &:hover {
+    text-decoration: underline;
+    color: pink;
+  }
+}

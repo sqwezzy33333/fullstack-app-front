@@ -1,0 +1,56 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: plum;
+
+  &:hover {
+    color: pink;
+  }
+}
+
+.person {
+  margin-right: 10px;
+}
+
+.active {
+  background-color: white;
+  color: #232323;
+}
+
+.person .mat-icon{
+  color: plum;
+  font-size: 30px;
+}
+
+.user {
+  color: plum;
+  font-size: 12px;
+}
+
+.user-options {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 200px;
+  cursor: pointer;
+}

@@ -1,0 +1,34 @@
+<h3 mat-dialog-title>Изменить пароль</h3>
+
+<form [formGroup]="form">
+
+  <mat-form-field>
+    <mat-label>Старый пароль</mat-label>
+    <input
+      matInput
+      placeholder="*****"
+      required
+      type="password"
+      formControlName="oldPassword"
+    />
+    <mat-error mat-error-ext></mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Новый пароль</mat-label>
+    <input
+      matInput
+      placeholder="*****"
+      required
+      type="password"
+      formControlName="newPassword"
+    />
+    <mat-error mat-error-ext></mat-error>
+  </mat-form-field>
+
+</form>
+
+<div class="buttons">
+  <button mat-stroked-button (click)="save()">Сохранить</button>
+  <button mat-flat-button mat-dialog-close>Выйти</button>
+</div>

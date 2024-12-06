@@ -4,13 +4,18 @@ import {NotificationComponent} from "../../../shared/component/notification/noti
 
 export type NotificationType = "success" | "info" | "warning" | "error";
 
+export interface NotificationData {
+  message: string;
+  type: NotificationType;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
   display(message: string, type: NotificationType, duration = 2000) {
-    const config: MatSnackBarConfig = {
+    const config: MatSnackBarConfig<NotificationData> = {
       data: {
         message,
         type,

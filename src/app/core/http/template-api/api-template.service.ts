@@ -93,7 +93,6 @@ export class ApiTemplateService {
     if (requiredToken) {
       httpOptions.headers = httpOptions.headers.append('Authorization', 'Bearer ' + this.userState.accessToken);
     }
-    console.log(httpOptions.headers, requiredToken);
     return httpOptions;
   }
 

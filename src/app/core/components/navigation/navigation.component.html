@@ -1,0 +1,34 @@
+<div class="menu">
+  @for (item of MENU_ROUTES; track item.name) {
+    <a class="item"
+       [routerLink]="item.link"
+       routerLinkActive="active">
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span>{{item.name}}</span>
+    </a>
+  }
+</div>
+
+<div class="user-options" [matMenuTriggerFor]="taskMenu">
+  <button mat-icon-button class="person">
+    <mat-icon>person</mat-icon>
+  </button>
+  <span class="user">{{(user$ | async)?.login}}</span>
+</div>
+
+
+
+<mat-menu #taskMenu="matMenu">
+  <button
+    mat-menu-item
+    (click)="editPass()">
+    <mat-icon>phonelink_lock</mat-icon>
+    <span>Сменить пароль</span>
+  </button>
+  <button
+    mat-menu-item
+    (click)="logOut()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Выйти</span>
+  </button>
+</mat-menu>

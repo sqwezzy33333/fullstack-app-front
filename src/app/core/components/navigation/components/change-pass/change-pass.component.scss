@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

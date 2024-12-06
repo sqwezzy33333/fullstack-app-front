@@ -7,9 +7,9 @@ import {LoginResponse} from "../../http/auth/models";
   providedIn: 'root'
 })
 export class UserService {
-  private user$ = new BehaviorSubject<User | null>(null);
+  user$ = new BehaviorSubject<User | null>(null);
 
-  private isAuth$ = new BehaviorSubject<boolean>(false);
+  isAuth$ = new BehaviorSubject<boolean>(false);
 
   set isAuth(value: boolean) {
     this.isAuth$.next(value);
@@ -44,7 +44,6 @@ export class UserService {
 
   loadToken() {
     const token = localStorage.getItem('access');
-    console.log(token);
     if (token) {
       this.isAuth = true;
     }
